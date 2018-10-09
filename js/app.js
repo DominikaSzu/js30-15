@@ -7,11 +7,13 @@ function addItem (e) {
     e.preventDefault(); // prevent page reload
     const text = (this.querySelector('[name=item]')).value;
     const item = {
-        text,
-        done: false
+        text
+//        text,
+//        done: false
     }
     items.push(item);
     populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
     this.reset();
 
 }
@@ -22,7 +24,7 @@ function populateList(plates =[], platesList) {
     platesList.innerHTML = plates.map((plate, i) => {
         return `
         <li>
-            <input type="checkbox" data-index=${i} id="item${i}" checked />
+            <input type="checkbox" data-index=${i} id="item${i}" ${ plate.done ? 'checked' : ''}>
             <label for="item${i}">${plate.text}</label>
         </li>
     `;
