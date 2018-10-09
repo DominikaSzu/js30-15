@@ -11,8 +11,22 @@ function addItem (e) {
         done: false
     }
     items.push(item);
+    populateList(items, itemsList);
     this.reset();
 
+}
+
+
+// function which will display added tapas, we give an empty array as an argument, to not stop the script in case we forgot to give some parameters
+function populateList(plates =[], platesList) {
+    platesList.innerHTML = plates.map((plate, i) => {
+        return `
+        <li>
+            <input type="checkbox" data-index=${i} id="item${i}" checked />
+            <label for="item${i}">${plate.text}</label>
+        </li>
+    `;
+    }).join('');
 }
 
 
