@@ -66,7 +66,9 @@ function uncheckAllInputs() {
 }
 
 function removeAllInputs() {
-    
+    localStorage.removeItem('items');
+    items.length = 0;
+    populateList(items, itemsList);
 }
 
 // we're listening for submit event of form, not click event on button, because we want to be sure, that when someone will click enter it will also be noticed
