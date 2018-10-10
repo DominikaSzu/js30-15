@@ -1,6 +1,9 @@
 const addItems = document.querySelector('.add-items');
 const itemsList = document.querySelector('.plates');
 const items = JSON.parse(localStorage.getItem('items')) || [];
+const checkAllBtn = document.querySelector('.checkAll');
+const uncheckAllBtn = document.querySelector('.uncheckAll');
+const removeAllBtn = document.querySelector('.removeAll');
 
 
 function addItem (e) {
@@ -46,9 +49,31 @@ function toggleDone(e) {
 //    }
 }
 
+function checkAllInputs() {
+    items.forEach(item => {
+        item.done = true;
+    });
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+}
+
+function uncheckAllInputs() {
+    items.forEach(item => {
+        item.done = false;
+    });
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+}
+
+function removeAllInputs() {
+    
+}
 
 // we're listening for submit event of form, not click event on button, because we want to be sure, that when someone will click enter it will also be noticed
 addItems.addEventListener('submit', addItem);
 itemsList.addEventListener('click', toggleDone);
+checkAllBtn.addEventListener('click', checkAllInputs);
+uncheckAllBtn.addEventListener('click', uncheckAllInputs);
+removeAllBtn.addEventListener('click', removeAllInputs);
 
 populateList(items, itemsList);
