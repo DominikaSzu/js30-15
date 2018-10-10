@@ -30,10 +30,25 @@ function populateList(plates =[], platesList) {
     }).join('');
 }
 
-
+function toggleDone(e) {
+    if (!e.target.matches('input')) return;
+    const element = e.target;
+    const index = element.dataset.index;
+    items[index].done = !items[index].done;
+    
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+    
+//    if (element.checked) {
+//        items[index].done = true;
+//    } else {
+//        items[index].done = false;
+//    }
+}
 
 
 // we're listening for submit event of form, not click event on button, because we want to be sure, that when someone will click enter it will also be noticed
 addItems.addEventListener('submit', addItem);
+itemsList.addEventListener('click', toggleDone);
 
 populateList(items, itemsList);
